@@ -1,13 +1,18 @@
-#include "shell_header"
+#include "shell_header.h"
 
 /**
  * split_line - function to split the line with tokens
- * @b: string
+ * @
+ *
  * Return: Always 0.
  */
 
-int split_line ()
+int split_line (char *buffer)
 {
-	strtok();
-	return (0);
+	char *token;
+
+	token = strtok(buffer, " ");
+	if (token == NULL)
+		;
+	return (token);
 }
