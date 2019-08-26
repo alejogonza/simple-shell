@@ -5,14 +5,13 @@
  * @b: string
  * Return: Always 0.
  */
-
-int loop_shell ()
+int loop_shell(void)
 {
-	char *buffer, out = '1', **arguments;
-	size_t bufsize = 32;
-	ssize_t line;
+	char **args;
+	int state;
+	size_t num_characters;
 
-	while (out)
+	do
 	{
 		write (1, "$ ", 2);
 		buffer = malloc(bufsize * sizeof(char));
@@ -21,12 +20,12 @@ int loop_shell ()
 			perror("Unable to allocate buffer");
 			exit(1);
 		}
-		line = getline(&buffer, &bufsize, stdin);
+		num_characters = getline(&buffer, &bufsize, stdin);
 		arguments = split_line(buffer);
-		execute = execute_arguments(arguments);
+		execute = execute_arguments(arguments, num_characters);
 		free(buffer);
-		free(line);
+		free(num_characters);
 		free(arguments);
-	}
+	} while (state);
 	return(0);
 }
