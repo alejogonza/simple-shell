@@ -7,7 +7,7 @@
  */
 int loop_shell(void)
 {
-	char **arguments, *buffer;
+	char **arguments, *buffer, *getp, **argpath;
 	int execute;
 	size_t bufsize = TOK_BUFSIZE, num_size;
 
@@ -22,10 +22,13 @@ int loop_shell(void)
 			return ('\0');
 		}
 		num_size = getline(&buffer, &bufsize, stdin);
-		arguments = split_line(buffer);
-		execute = execute_arguments(arguments, num_size);
+		arguments = split_line(buffer, " ");
+		getp = getpath();
+		argpath = malloc(bufsize * sizeof(char));
+		argpath = split_line(getp, ":=");
+		argpath = _strcat(argpath, buffer);
+/*		execute = execute_arguments(arguments, num_size);*/
 		free(buffer);
-/*		free(bufsize);*/
 		free(arguments);
 	} while (execute);
 	return(0);

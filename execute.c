@@ -1,24 +1,11 @@
 #include "shell_header.h"
-
-
-
-/* call functions */
-char *array_str[] = {
-  "cd",
-  "exit"
-};
-
-// ----- array de funciones (DISPARADORES) -----------
-int (*array_funciones[]) (char **) = {
-  &function_cd,
-  &function_exit
-};
+extern char** environ;
 
 /**
- * _strcmp - check the code for Holberton School students.
+ * _strcmp - comparison between strings
  * @s1: string 1
  * @s2: string 2
- * Return: rest.
+ * Return: rest type int.
  */
 int _strcmp(char *s1, char *s2)
 {
@@ -33,21 +20,63 @@ int _strcmp(char *s1, char *s2)
 	return (rest);
 }
 
+
 /**
+ * getpath - function to have the PATH line from env
+ * Return: rest type int.
+ */
+char *getpath(void)
+{
+	int i = 0, j = 0, count = 0, breaker = 0;
+	char *looking = "PATH";
+
+	while (environ[i] != NULL)
+	{
+		for (j = 0; environ[i][j] = looking[j]; j++)
+		{
+			if (j == 3)
+				break;
+		}
+		if (j == 3)
+			break;
+	}
+	return(environ[i]);
+}
+
+/**
+ * *_strcat - concatenate two strings
+ * @dest: destin
+ * @src: source
+ * @n: number
+ * Return: dest.
+ */
+char *_strcat(char *dest, char *src)
+{
+	int i = 0, j = 0;
+
+	while (dest[i] != '\0')
+	{
+		i++;
+	}
+	dest[i] = '/';
+	i++;
+	while (src[j] != '\0')
+	{
+		dest[i] = src[j];
+		j++;
+		i++;
+	}
+	dest[i] = '\0';
+	return (dest);
+}
+
+/*
  * execute_arguments - function to execute all arguments founded
  * @b: string
  * Return: Always 0.
- */
-int execute_arguments(char **args, int num_characters)
-{
-	int i;
 
-	if (args[0] == NULL)
-		return 1;
-	for (i = 0; i < num_characters; i++)
-	{
-		if (_strcmp(args[0], array_str[i]) == 0)
-			return (*array_funciones[i])(args);
-	}
-	return hilos_programa(args);
+int execute_arguments(int argc, char **argv, char **env)
+{
+
 }
+*/

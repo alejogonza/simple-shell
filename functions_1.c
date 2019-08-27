@@ -27,9 +27,9 @@ int function_exit(char **args)
 	return 0;
 }
 
-/**
+/*
  * iniciar un disparador y esperar que termine
- */
+ *
 int hilos_programa(char **args)
 {
   //Declaramos el PID y su estado
@@ -41,7 +41,7 @@ int hilos_programa(char **args)
     printf("error pid < 0\n");
   }
   else if (pid == 0) {
-	  if (execvp(args[0], args) == -1) printf("error xd comando no existe ESPERANZA METASE EL DEDO\n");
+	  if (execvp(args[0], args) == -1) printf("error pid = 0\n");
 	  exit(EXIT_FAILURE);}
   {
     //proceso ejecutando
@@ -51,3 +51,4 @@ int hilos_programa(char **args)
   }
   return 1;
 }
+*/

@@ -33,7 +33,7 @@ void *_realloc(void *ptr, unsigned int old_size, unsigned int new_size)
  * Return: tokens
  */
 
-char **split_line (char *buffer)
+char **split_line (char *buffer, char *tok)
 {
 	char *token, **tokens, **back_tokens;
 	int posicion = 0, oldsize, newsize, bufsize = TOK_BUFSIZE;
@@ -44,7 +44,7 @@ char **split_line (char *buffer)
 		perror("Error creating malloc");
 		exit(98);
 	}
-	token = strtok(buffer, " ");
+	token = strtok(buffer, tok);
 	while (token != NULL)
 	{
 		tokens[posicion] = token;
