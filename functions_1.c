@@ -38,11 +38,12 @@ int hilos_programa(char **args)
   //iniciamos el fork
   pid = fork();
   if (pid < 0) {
-    printf("error xd\n");
-  } else if (pid == 0) {
-    if (execvp(args[0], args) == -1) printf("error xd comando no existe ESPERANZA METASE EL DEDO\n");
-    exit(EXIT_FAILURE);
-  } else {
+    printf("error pid < 0\n");
+  }
+  else if (pid == 0) {
+	  if (execvp(args[0], args) == -1) printf("error xd comando no existe ESPERANZA METASE EL DEDO\n");
+	  exit(EXIT_FAILURE);}
+  {
     //proceso ejecutando
     do {
       waitpid(pid, &estado, WUNTRACED);

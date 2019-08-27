@@ -7,9 +7,9 @@
  */
 int loop_shell(void)
 {
-	char **args;
-	int state;
-	size_t num_characters;
+	char **arguments, *buffer;
+	int execute;
+	size_t bufsize = TOK_BUFSIZE, num_size;
 
 	do
 	{
@@ -17,15 +17,16 @@ int loop_shell(void)
 		buffer = malloc(bufsize * sizeof(char));
 		if (buffer == NULL)
 		{
+			free(buffer);
 			perror("Unable to allocate buffer");
-			exit(1);
+			return ('\0');
 		}
-		num_characters = getline(&buffer, &bufsize, stdin);
+		num_size = getline(&buffer, &bufsize, stdin);
 		arguments = split_line(buffer);
-		execute = execute_arguments(arguments, num_characters);
+		execute = execute_arguments(arguments, num_size);
 		free(buffer);
-		free(num_characters);
+/*		free(bufsize);*/
 		free(arguments);
-	} while (state);
+	} while (execute);
 	return(0);
 }

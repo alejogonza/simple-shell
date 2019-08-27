@@ -1,5 +1,19 @@
 #include "shell_header.h"
 
+
+
+/* call functions */
+char *array_str[] = {
+  "cd",
+  "exit"
+};
+
+// ----- array de funciones (DISPARADORES) -----------
+int (*array_funciones[]) (char **) = {
+  &function_cd,
+  &function_exit
+};
+
 /**
  * _strcmp - check the code for Holberton School students.
  * @s1: string 1
