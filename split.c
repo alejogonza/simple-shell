@@ -33,7 +33,7 @@ void *_realloc(void *ptr, unsigned int old_size, unsigned int new_size)
  * Return: tokens
  */
 
-char **split_line (char *buffer, char *tok)
+char **split_line (char *buffer)
 {
 	char *token, **tokens, **back_tokens;
 	int posicion = 0, oldsize, newsize, bufsize = TOK_BUFSIZE;
@@ -44,7 +44,7 @@ char **split_line (char *buffer, char *tok)
 		perror("Error creating malloc");
 		exit(98);
 	}
-	token = strtok(buffer, tok);
+	token = strtok(buffer, " ");
 	while (token != NULL)
 	{
 		tokens[posicion] = token;
@@ -64,6 +64,38 @@ char **split_line (char *buffer, char *tok)
 			}
 		}
 		token = strtok(NULL, TOK_DELIM);
+	}
+	tokens[posicion] = NULL;
+	return (tokens);
+}
+
+
+/**
+ * split_line_path - function to split the line with tokens
+ * @buffer: Line of arguments
+ * Return: tokens
+ */
+
+char **split_line_path (char *buffer)
+{
+	char *token, **tokens, **back_tokens, *equal;
+	int posicion = 0, oldsize, newsize, bufsize = TOK_BUFSIZE;
+
+	tokens = malloc(TOK_BUFSIZE * sizeof(char*));
+	if (tokens == NULL)
+	{
+		perror("Error creating malloc");
+		return NULL;
+	}
+	equal = strtok(buffer, "=");
+	equal = strtok(NULL, "=");
+	token = strtok(equal, ":");
+	while (token != NULL)
+	{
+		tokens[posicion] = malloc((TOK_BUFSIZE * sizeof(char*)));
+		tokens[posicion] = token;
+		posicion++;
+		token = strtok(NULL, ":");
 	}
 	tokens[posicion] = NULL;
 	return (tokens);

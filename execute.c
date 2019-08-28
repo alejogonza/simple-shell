@@ -1,5 +1,4 @@
 #include "shell_header.h"
-extern char** environ;
 
 /**
  * _strcmp - comparison between strings
@@ -25,19 +24,22 @@ int _strcmp(char *s1, char *s2)
  * getpath - function to have the PATH line from env
  * Return: rest type int.
  */
-char *getpath(void)
+char *getpath(char *looking)
 {
 	int i = 0, j = 0, count = 0, breaker = 0;
-	char *looking = "PATH";
+	extern char** environ;
 
-	while (environ[i] != NULL)
+	for (; environ[i] != NULL; i++)
 	{
-		for (j = 0; environ[i][j] = looking[j]; j++)
+		for (j = 0, count = 0; environ[i][j] == looking[j]; j++, count++)
 		{
-			if (j == 3)
+			if (count == 4)
+			{
+				breaker = 1;
 				break;
+			}
 		}
-		if (j == 3)
+		if (breaker)
 			break;
 	}
 	return(environ[i]);
@@ -52,14 +54,12 @@ char *getpath(void)
  */
 char *_strcat(char *dest, char *src)
 {
-	int i = 0, j = 0;
+	int i = 0, j = 0, k = 0, l = 0;
 
 	while (dest[i] != '\0')
 	{
 		i++;
 	}
-	dest[i] = '/';
-	i++;
 	while (src[j] != '\0')
 	{
 		dest[i] = src[j];
@@ -70,13 +70,33 @@ char *_strcat(char *dest, char *src)
 	return (dest);
 }
 
+
 /*
- * execute_arguments - function to execute all arguments founded
+ *  execute_arguments - function to execute all arguments founded
  * @b: string
  * Return: Always 0.
 
 int execute_arguments(int argc, char **argv, char **env)
 {
+	pid_t child_pid;
+	int status;
 
+	child_pid = fork();
+	if (child_pid == -1)
+	{
+		perror("Error:");
+		return (1);
+	}
+	if (child_pid == 0)
+	{
+		printf("Wait for me, wait for me\n");
+		sleep(3);
+	}
+	else
+	{
+		wait(&status);
+		printf("Oh, it's all better now\n");
+	}
+	return (0);
 }
 */
