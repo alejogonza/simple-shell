@@ -2,27 +2,27 @@
 
 /**
  * _strcmp - comparison between strings
- * @str1: string 1
- * @str2: string 2
+ * @s1: string 1
+ * @s2: string 2
  * Return: rest type int.
  */
-int _strcmp(char *str1, char *str2)
+int _strcmp(char *s1, char *s2)
 {
 	int rest = 0;
 
-	while (*str1 == *str2 && *str1 != 0 && *str2 != 0)
+	while (*s1 == *s2 && *s1 != 0 && *s2 != 0)
 	{
-		str1++;
-		str2++;
+		s1++;
+		s2++;
 	}
-	rest = *str1 - *str2;
+	rest = *s1 - *s2;
 	return (rest);
 }
 
 
 /**
  * getpath - function to have the PATH line from env
- * @looking: value to compare
+ * @looking: string for compare
  * Return: rest type int.
  */
 char *getpath(char *looking)
@@ -77,31 +77,30 @@ char *_strcat(char *s1, char *s2)
 	else
 		return (p);
 }
+
 /**
- *  execute_arguments - function to execute all arguments founded
+ * execute_arguments - function to search if have executable in the path
+ * @argpath: argument concat
  * Return: Always 0.
  */
-int execute_arguments()
+int execute_arguments(char *argpath)
 {
-	pid_t child_pid;
+	pid_t pid;
 	int status;
+	char *argus[3] = { 0 };
 
-	child_pid = fork();
-	if (child_pid == -1)
+	argus[0] = argpath;
+	pid = fork();
+	if (pid == 0)
 	{
-		perror("Error:");
-		return (1);
+		if (execve(argpath, argus, environ) == -1)
+		{
+			perror("lsh");
+		}
+		exit(EXIT_FAILURE);
 	}
-	if (child_pid == 0)
-	{
-		printf("Wait for me, wait for me\n");
-		sleep(3);
-	}
+	else if (pid < 0)
+		perror("lsh");
 	else
-	{
 		wait(&status);
-		printf("Oh, it's all better now\n");
-	}
-	return (0);
 }
-*/
