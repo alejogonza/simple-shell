@@ -34,7 +34,7 @@ int loop_shell(void)
 			printf ("argpath[%d], %s\n", i, argpath[i]);
 			j = 0;
 		}
-/*		execute = execute_arguments(arguments, num_size);*/
+		execute = execute_arguments(arguments, num_size);
 		free(buffer);
 		free(arguments);
 	} while (execute);

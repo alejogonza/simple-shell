@@ -11,6 +11,8 @@
 #include <stdlib.h>
 #include <string.h>
 
+extern char **environ;
+
 int funcion_cd(char **args);
 int funcion_exit(char **args);
 

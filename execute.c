@@ -2,32 +2,32 @@
 
 /**
  * _strcmp - comparison between strings
- * @s1: string 1
- * @s2: string 2
+ * @str1: string 1
+ * @str2: string 2
  * Return: rest type int.
  */
-int _strcmp(char *s1, char *s2)
+int _strcmp(char *str1, char *str2)
 {
 	int rest = 0;
 
-	while (*s1 == *s2 && *s1 != 0 && *s2 != 0)
+	while (*str1 == *str2 && *str1 != 0 && *str2 != 0)
 	{
-		s1++;
-		s2++;
+		str1++;
+		str2++;
 	}
-	rest = *s1 - *s2;
+	rest = *str1 - *str2;
 	return (rest);
 }
 
 
 /**
  * getpath - function to have the PATH line from env
+ * @looking: value to compare
  * Return: rest type int.
  */
 char *getpath(char *looking)
 {
 	int i = 0, j = 0, count = 0, breaker = 0;
-	extern char** environ;
 
 	for (; environ[i] != NULL; i++)
 	{
@@ -42,14 +42,13 @@ char *getpath(char *looking)
 		if (breaker)
 			break;
 	}
-	return(environ[i]);
+	return (environ[i]);
 }
 
 /**
  * *_strcat - concatenate two strings
- * @dest: destin
- * @src: source
- * @n: number
+ * @s1: string 1
+ * @s2: string 2
  * Return: dest.
  */
 char *_strcat(char *s1, char *s2)
@@ -78,12 +77,11 @@ char *_strcat(char *s1, char *s2)
 	else
 		return (p);
 }
-/*
+/**
  *  execute_arguments - function to execute all arguments founded
- * @b: string
  * Return: Always 0.
-
-int execute_arguments(int argc, char **argv, char **env)
+ */
+int execute_arguments()
 {
 	pid_t child_pid;
 	int status;
