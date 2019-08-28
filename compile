@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+gcc -g shell_header.h *.c
+./a.out
