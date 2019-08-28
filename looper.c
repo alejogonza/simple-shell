@@ -27,18 +27,11 @@ int loop_shell(void)
 		getp = getpath("PATH=");
 		argpath = malloc(bufsize * sizeof(char));
 		argpath = split_line_path(getp);
-		while (argpath[i] != '\0')
+		for (i = 0; argpath[i] != '\0'; i++)
 		{
-			while(argpath[i][j] != '\0')
-				j++;
-			if (argpath[i][j] == '\0')
-			{
-				argpath[i][j] = '/';
-				j++;
-				argpath[i][j] = '\0';
-			}
-			_strcat(argpath[i], buffer);
-			i = i + 2;
+			argpath[i] = _strcat(argpath[i], "/");
+			argpath[i] = _strcat(argpath[i], buffer);
+			printf ("argpath[%d], %s\n", i, argpath[i]);
 			j = 0;
 		}
 /*		execute = execute_arguments(arguments, num_size);*/

@@ -52,25 +52,32 @@ char *getpath(char *looking)
  * @n: number
  * Return: dest.
  */
-char *_strcat(char *dest, char *src)
+char *_strcat(char *s1, char *s2)
 {
-	int i = 0, j = 0, k = 0, l = 0;
+	char *p = NULL;
+	int x = 0, y = 0, z, c;
 
-	while (dest[i] != '\0')
+	if (s1 == NULL)
+		s1 = "";
+	if (s2 == NULL)
+		s2 = "";
+	while (s1[x] != '\0')
+		x++;
+	while (s2[y] != '\0')
+		y++;
+	p = malloc(sizeof(char) * ((x + y) + 1));
+	if (p != 0)
 	{
-		i++;
+		for (z = 0; z < x; z++)
+			p[z] = s1[z];
+		for (z = z, c = 0; z < (x + y); z++, c++)
+			p[z] = s2[c];
+		p[z] = '\0';
+		return (p);
 	}
-	while (src[j] != '\0')
-	{
-		dest[i] = src[j];
-		j++;
-		i++;
-	}
-	dest[i] = '\0';
-	return (dest);
+	else
+		return (p);
 }
-
-
 /*
  *  execute_arguments - function to execute all arguments founded
  * @b: string
