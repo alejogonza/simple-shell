@@ -3,28 +3,28 @@
 .B hsh - Simple_shell
 .br
 .SH SYNOPSIS:
-.B ./hsh 
+.B ./hsh
 [command] [options]
 .br
 .SH COPYRIGHT:
-.B hsh 
+.B hsh
 is Copyright (C) Alejandro Gonzalez Serna and Dilan Rincon
 .br
 .SH DESCRIPTION:
-.B hsh 
+.B hsh
 (Simple Shell) holberton school project to learn the operation of shell making a minimalist version of it.
 .br
 .SH ARGUMENTS:
-.B exit: 
+.B exit:
 quits the program.
 
-.B ls: 
+.B ls:
 list directory contents.
 
-.B exit: 
+.B exit:
 quits the program, exits the shell.
 
-.B env: 
+.B env:
 prints the environment variables
 
 .br
@@ -59,4 +59,3 @@ No known bugs, if you find any report it to 949@holbertonschool.com
 
 .SH AUTHORS:
 Alejandro Gonzalez Serna, Dilan Rincon.
-
