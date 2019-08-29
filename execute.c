@@ -103,4 +103,5 @@ int execute_arguments(char *argpath)
 		perror("lsh");
 	else
 		wait(&status);
+	return (1);
 }

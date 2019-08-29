@@ -30,4 +30,7 @@ int stat_arguments(char *argpath);
 int _strcmp(char *s1, char *s2);
 int function_cd(char **args);
 int function_exit(char **args);
+void retu(char *a);
+void signalc(int sig);
+int _strcmp(char *s1, char *s2);
 #endif

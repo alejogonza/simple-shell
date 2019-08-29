@@ -7,7 +7,7 @@
  * @argv: arguments
  * Return: always 0
  */
-int main(int argc, char **argv)
+int main(__attribute__((unused)) int argc, __attribute__((unused)) char **argv)
 {
 	loop_shell();
 	return (0);

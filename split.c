@@ -35,12 +35,13 @@ void *_realloc(void *ptr, unsigned int old_size, unsigned int new_size)
 
 char **split_line(char *buffer)
 {
-	char *token, **tokens, **back_tokens;
-	int posicion = 0, oldsize, newsize, bufsize = TOK_BUFSIZE;
+	char *token, **tokens;
+	int posicion = 0;
 
 	tokens = malloc(TOK_BUFSIZE * sizeof(char *));
 	if (tokens == NULL)
 	{
+		free(tokens);
 		perror("Error creating malloc");
 		exit(98);
 	}
@@ -49,19 +50,11 @@ char **split_line(char *buffer)
 	{
 		tokens[posicion] = token;
 		posicion++;
-		if (posicion >= bufsize)
-		{
-		bufsize += TOK_BUFSIZE;
-		back_tokens = tokens;
-		newsize = bufsize * sizeof(char *);
-		oldsize = (bufsize - TOK_BUFSIZE) * sizeof(char *);
-		tokens = _realloc(tokens, oldsize, newsize);
 		if (!tokens)
 		{
-			free(back_tokens);
+			free(tokens);
 			perror("Error in realloc");
 			exit(98);
-		}
 		}
 		token = strtok(NULL, TOK_DELIM);
 	}
@@ -78,8 +71,8 @@ char **split_line(char *buffer)
 
 char **split_line_path(char *buffer)
 {
-	char *token, **tokens, **back_tokens, *equal;
-	int posicion = 0, oldsize, newsize, bufsize = TOK_BUFSIZE;
+	char *token, **tokens, *equal;
+	int posicion = 0;
 
 	tokens = malloc(TOK_BUFSIZE * sizeof(char *));
 	if (tokens == NULL)
