@@ -2,7 +2,6 @@
 
 /**
  * loop_shell - main function
- * @b: string
  * Return: Always 0.
  */
 int loop_shell(void)
@@ -11,9 +10,8 @@ int loop_shell(void)
 	int execute, i = 0, j = 0;
 	size_t bufsize = TOK_BUFSIZE, num_size;
 
-	do
-	{
-		write (1, "$ ", 2);
+	do {
+		write(1, "$ ", 2);
 		buffer = malloc(bufsize * sizeof(char));
 		if (buffer == NULL)
 		{
@@ -31,12 +29,12 @@ int loop_shell(void)
 		{
 			argpath[i] = _strcat(argpath[i], "/");
 			argpath[i] = _strcat(argpath[i], buffer);
-			printf ("argpath[%d], %s\n", i, argpath[i]);
 			j = 0;
+			if (stat_arguments(argpath[i]) == 0)
+				execute = execute_arguments(argpath[i]);
 		}
-		execute = hilos_programa(arguments, num_size);
-		free(buffer);
 		free(arguments);
+		free(buffer);
 	} while (execute);
-	return(0);
+	return (0);
 }

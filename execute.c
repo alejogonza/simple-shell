@@ -22,6 +22,7 @@ int _strcmp(char *s1, char *s2)
 
 /**
  * getpath - function to have the PATH line from env
+ * @looking: string for compare
  * Return: rest type int.
  */
 char *getpath(char *looking)
@@ -41,14 +42,13 @@ char *getpath(char *looking)
 		if (breaker)
 			break;
 	}
-	return(environ[i]);
+	return (environ[i]);
 }
 
 /**
  * *_strcat - concatenate two strings
- * @dest: destin
- * @src: source
- * @n: number
+ * @s1: string 1
+ * @s2: string 2
  * Return: dest.
  */
 char *_strcat(char *s1, char *s2)
@@ -77,28 +77,30 @@ char *_strcat(char *s1, char *s2)
 	else
 		return (p);
 }
-/*
- *  execute_arguments - function to execute all arguments founded
- * @b: string
+
+/**
+ * execute_arguments - function to search if have executable in the path
+ * @argpath: argument concat
  * Return: Always 0.
  */
-int hilos_programa(char **args, int num)
+int execute_arguments(char *argpath)
 {
-  //Declaramos el PID y su estado
-  pid_t pid;
-  int estado;
-  //iniciamos el fork
-  pid = fork();
-  if (pid < 0) {
-    printf("error xd\n");
-  } else if (pid == 0) {
-    if (execvp(args[0], args) == -1) printf("error xd comando no existe ESPERANZA METASE EL DEDO\n");
-    exit(EXIT_FAILURE);
-  } else {
-    //proceso ejecutando
-    do {
-      waitpid(pid, &estado, WUNTRACED);
-    } while (!WIFEXITED(estado) && !WIFSIGNALED(estado));
-  }
-  return 1;
+	pid_t pid;
+	int status;
+	char *argus[3] = { 0 };
+
+	argus[0] = argpath;
+	pid = fork();
+	if (pid == 0)
+	{
+		if (execve(argpath, argus, environ) == -1)
+		{
+			perror("lsh");
+		}
+		exit(EXIT_FAILURE);
+	}
+	else if (pid < 0)
+		perror("lsh");
+	else
+		wait(&status);
 }

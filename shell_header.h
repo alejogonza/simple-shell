@@ -10,8 +10,9 @@
 #include <unistd.h>
 #include <stdlib.h>
 #include <string.h>
+#include <sys/stat.h>
 
-extern char** environ;
+extern char **environ;
 
 int funcion_cd(char **args);
 int funcion_exit(char **args);
@@ -24,9 +25,9 @@ int loop_shell(void);
 char **split_line_path(char *buffer);
 char **split_line(char *buffer);
 void *_realloc(void *ptr, unsigned int old_size, unsigned int new_size);
-int hilos_programa(char **args, int num);
-int _strcmp(char *s1, char*s2);
+int execute_arguments(char *argpath);
+int stat_arguments(char *argpath);
+int _strcmp(char *s1, char *s2);
 int function_cd(char **args);
 int function_exit(char **args);
-int hilos_programa(char **args);
 #endif

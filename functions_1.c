@@ -2,8 +2,9 @@
 
 /**
  * function_cd - verify if argument is a existing directory,
- * if not have arguments ask for one
  * @args: argument
+ * if not have arguments ask for one
+ * Return: always 1
  */
 
 int function_cd(char **args)
@@ -15,40 +16,29 @@ int function_cd(char **args)
 			write(1, "Directory not found\n", 20);
 	} else
 		write(1, "Give one argument for cd\n", 25);
-	return 1;
+	return (1);
 }
 
 /**
  * function_exit - command exit
  * @args: arguments
+ * Return: always 0
  */
 int function_exit(char **args)
 {
-	return 0;
+	return (0);
 }
 
-/*
- * iniciar un disparador y esperar que termine
- *
-int hilos_programa(char **args)
+/**
+ * stat_arguments - function to search if have executable in the path
+ * @argpath: arguments concat
+ * Return: Always 0.
+ */
+int stat_arguments(char *argpath)
 {
-  //Declaramos el PID y su estado
-  pid_t pid;
-  int estado;
-  //iniciamos el fork
-  pid = fork();
-  if (pid < 0) {
-    printf("error pid < 0\n");
-  }
-  else if (pid == 0) {
-	  if (execvp(args[0], args) == -1) printf("error pid = 0\n");
-	  exit(EXIT_FAILURE);}
-  {
-    //proceso ejecutando
-    do {
-      waitpid(pid, &estado, WUNTRACED);
-    } while (!WIFEXITED(estado) && !WIFSIGNALED(estado));
-  }
-  return 1;
+	struct stat st;
+
+	if (stat(argpath, &st) == 0)
+		return (0);
+	return (1);
 }
-*/
